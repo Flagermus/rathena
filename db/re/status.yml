@@ -142,6 +142,8 @@ Body:
       BossResist: true
       StopAttacking: true
       StopCasting: true
+    MinRate: 1000
+    MinDuration: 1000
     Fail:
       Refresh: true
       Inspiration: true

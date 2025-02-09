@@ -66,6 +66,9 @@ class status_change;
 // Value that represents by how much each ASPD point reduces amotion
 #define AMOTION_INTERVAL 10
 
+// (DARO) Define
+#define STUN_DURATION_REDUCE_EACH_VIT			22
+
 /// Refine type
 enum e_refine_type : uint16{
 	REFINE_TYPE_ARMOR = 0,

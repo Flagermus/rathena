@@ -9412,8 +9412,13 @@ t_tick status_get_sc_def(struct block_list *src, struct block_list *bl, enum sc_
 			sc_def2 = status->luk*10 + status_get_lv(bl)*10 - status_get_lv(src)*10;
 			tick_def2 = status->luk*10;
 #else
-			sc_def = status->vit * 100 - levelAdv;
-			tick_def2 = -500;
+			// Old stun mechanic
+			// sc_def = status->vit * 100 - levelAdv;
+			// tick_def2 = -500;
+
+			// (DARO) New stun mechanic
+			sc_def = status->vit * 100;
+			tick_def2 = status->vit * STUN_DURATION_REDUCE_EACH_VIT;
 #endif
 			break;
 		case SC_SILENCE:
@@ -9584,7 +9589,7 @@ t_tick status_get_sc_def(struct block_list *src, struct block_list *bl, enum sc_
 			tick_def2 = status->luk * 100;
 			break;
 		default:
-			// Effect that cannot be reduced? Likely a buff.
+			// Effect that cannot be reduced? Likely a buff.c
 			if (!(rnd()%10000 < rate))
 				return 0;
 			return tick ? tick : 1;
