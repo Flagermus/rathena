@@ -7611,6 +7611,10 @@ static defType status_calc_def(struct block_list *bl, status_change *sc, int32 d
 	if (sc->getSCE(SC_ATTACK_STANCE))
 		def -= sc->getSCE(SC_ATTACK_STANCE)->val2;
 
+	// (DARO) Custom status effect
+	if(sc->getSCE(SC_DEF_DOWN_20))
+		def = (def * 20) / 100;
+
 	return (defType)cap_value(def,DEFTYPE_MIN,DEFTYPE_MAX);
 }
 
@@ -9587,6 +9591,9 @@ t_tick status_get_sc_def(struct block_list *src, struct block_list *bl, enum sc_
 			break;
 		case SC_NORECOVER_STATE:
 			tick_def2 = status->luk * 100;
+			break;
+		// (DARO) Custom status effect
+		case SC_DEF_DOWN_20:
 			break;
 		default:
 			// Effect that cannot be reduced? Likely a buff.c

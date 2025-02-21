@@ -22,6 +22,9 @@
 //= 	val4: <usage for>
 //============================================================
 
+SC_DEF_DOWN_20	()
+desc: DEF -20%
+
 SC_STONE	()
 	desc: DEF -50%; if HP>25% lose 1% HP/5 sec; MDEF +25%; change element to Earth Lv 1; ignore Steal & Lex Aeterna; can't move/attack/pick item/use item/use skill/sit/logout
 	val1:

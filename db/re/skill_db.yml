@@ -49560,3 +49560,13 @@ Body:
     Duration1: 10000
     Cooldown: 60000
     Status: Emergency_Move
+  - Id: 10020
+    Name: NPC_DEF_DOWN_20
+    Description: Def Down 20
+    MaxLevel: 1
+    TargetType: Attack
+    Range: 9
+    Hit: Single
+    HitCount: 1
+    Duration1: 50000
+    Status: Def_Down_20

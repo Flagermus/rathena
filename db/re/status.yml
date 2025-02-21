@@ -9758,3 +9758,11 @@ Body:
       NoBanishingBuster: true
       NoDispell: true
       NoClearance: true
+# (DARO) Custom status effect
+  - Status: Def_Down_20
+    Icon: EFST_DEF_DOWN_20
+    CalcFlags:
+      Def: true
+    DurationLookup: NPC_DEF_DOWN_20
+    Flags:
+      Debuff: true
