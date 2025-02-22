@@ -176,28 +176,29 @@ Body:
         Plagiarism: true
         Reproduce: true
     Duration2: 4500
+    Cooldown: 1500
     Requires:
       SpCost:
         - Level: 1
-          Amount: 8
+          Amount: 4
         - Level: 2
-          Amount: 8
+          Amount: 4
         - Level: 3
-          Amount: 8
+          Amount: 4
         - Level: 4
-          Amount: 8
+          Amount: 4
         - Level: 5
-          Amount: 8
+          Amount: 4
         - Level: 6
-          Amount: 15
+          Amount: 8
         - Level: 7
-          Amount: 15
+          Amount: 8
         - Level: 8
-          Amount: 15
+          Amount: 8
         - Level: 9
-          Amount: 15
+          Amount: 8
         - Level: 10
-          Amount: 15
+          Amount: 8
       Weapon:
         Fist: true
         Dagger: true

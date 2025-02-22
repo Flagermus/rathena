@@ -45,8 +45,8 @@ class status_change;
 #define SKILL_NOCONSUME_REQ 0x20
 
 // (DARO)
-#define ALWAY_SUCCESS			10000
-#define BASH_DEF_DOWN_DURATION 	3500
+#define STT_EFF_PERCENT_CHANCE_100			10000
+#define BASH_DEF_DOWN_DURATION 				3500
 
 /// Constants to identify a skill's nk value (damage properties)
 /// The NK value applies only to non INF_GROUND_SKILL skills

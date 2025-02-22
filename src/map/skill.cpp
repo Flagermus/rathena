@@ -1404,11 +1404,11 @@ int32 skill_additional_effect( struct block_list* src, struct block_list *bl, ui
 	case SM_BASH:
 		if( sd && skill_lv > 5 && pc_checkskill(sd,SM_FATALBLOW)>0 ){
 			//BaseChance gets multiplied with BaseLevel/50.0; 500/50 simplifies to 10 [Playtester]
-			status_change_start(src,bl,SC_STUN,(skill_lv-5)*sd->status.base_level*10,
+			status_change_start(src,bl,SC_STUN,STT_EFF_PERCENT_CHANCE_100,
 				skill_lv,0,0,0,skill_get_time2(skill_id,skill_lv),SCSTART_NONE);
 		}
 		// (DARO) Add def down status to Bash
-		status_change_start(src,bl,SC_DEF_DOWN_20, ALWAY_SUCCESS, 0, 0 ,0 ,0, BASH_DEF_DOWN_DURATION ,SCSTART_NONE);
+		status_change_start(src,bl,SC_DEF_DOWN_20, STT_EFF_PERCENT_CHANCE_100, 0, 0 ,0 ,0, BASH_DEF_DOWN_DURATION ,SCSTART_NONE);
 		break;
 
 	case MER_CRASH:
