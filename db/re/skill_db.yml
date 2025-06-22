@@ -49560,3 +49560,27 @@ Body:
     Duration1: 10000
     Cooldown: 60000
     Status: Emergency_Move
+  - Id: 800
+    Name: NV_RELOCATION
+    Description: Relocation
+    MaxLevel: 1
+    TargetType: Ground
+    DamageFlags:
+      NoDamage: true
+    Range: 3
+    Hit: Single
+    HitCount: 1
+    Cooldown: 3000
+  - Id: 801
+    Name: NV_NULLPHASE
+    Description: Null Phase
+    MaxLevel: 1
+    Type: Magic
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Hit: Single
+    HitCount: 1
+    Duration1: 500
+    Cooldown: 3000
+    Status: Null_Phase
