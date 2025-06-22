@@ -9741,6 +9741,8 @@ Body:
       NoBanishingBuster: true
       NoDispell: true
       NoClearance: true
+  - Status: Null_Phase
+    DurationLookup: NV_NULLPHASE
   - Status: Shadow_Clock
     Icon: EFST_SHADOW_CLOCK
     DurationLookup: SS_TOKEDASU

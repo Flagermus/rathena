@@ -1966,6 +1966,7 @@
 	export_constant(SC_STAR_BURST);
 	export_constant(SC_SKY_ENCHANT);
 	export_constant(SC_WILD_WALK);
+	export_constant(SC_NULL_PHASE);
 	export_constant(SC_SHADOW_CLOCK);
 	export_constant(SC_SHINKIROU_CALL);
 	export_constant(SC_NIGHTMARE);

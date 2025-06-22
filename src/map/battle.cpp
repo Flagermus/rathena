@@ -1918,6 +1918,10 @@ int64 battle_calc_damage(struct block_list *src,struct block_list *bl,struct Dam
 		// Renewal: steel body reduces all incoming damage to 1/10 [helvetica]
 		if( tsc->getSCE(SC_STEELBODY) )
 			damage = damage > 10 ? damage / 10 : 1;
+		
+		// Null Phase block all damage
+		if ( tsc->getSCE(SC_NULL_PHASE) )
+			damage = 0;
 #endif
 
 		//Finally added to remove the status of immobile when Aimed Bolt is used. [Jobbie]
