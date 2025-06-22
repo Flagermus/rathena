@@ -49571,3 +49571,16 @@ Body:
     Hit: Single
     HitCount: 1
     Cooldown: 3000
+  - Id: 801
+    Name: NV_NULLPHASE
+    Description: Null Phase
+    MaxLevel: 1
+    Type: Magic
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Hit: Single
+    HitCount: 1
+    Duration1: 500
+    Cooldown: 3000
+    Status: Null_Phase

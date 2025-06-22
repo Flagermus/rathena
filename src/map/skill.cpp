@@ -8045,6 +8045,7 @@ int32 skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, 
 		break;
 	case AL_INCAGI:
 	case AL_BLESSING:
+	case NV_NULLPHASE:
 	case MER_INCAGI:
 	case MER_BLESSING:
 		clif_skill_nodamage(src, *bl, skill_id, skill_lv);

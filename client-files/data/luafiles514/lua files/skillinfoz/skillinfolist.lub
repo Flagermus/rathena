@@ -16440,5 +16440,13 @@ SKILL_INFO_LIST = {
 		SpAmount = { 0 },
 		bSeperateLv = false,
 		AttackRange = { 3 },
+	},
+	[SKID.NV_NULLPHASE] = {
+		"NV_NULLPHASE",
+		SkillName = "Null Phase",
+		MaxLv = 1,
+		SpAmount = { 0 },
+		bSeperateLv = false,
+		AttackRange = { 1 },
 	}
 }

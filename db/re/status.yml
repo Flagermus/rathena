@@ -9756,3 +9756,5 @@ Body:
       NoBanishingBuster: true
       NoDispell: true
       NoClearance: true
+  - Status: Null_Phase
+    DurationLookup: NV_NULLPHASE

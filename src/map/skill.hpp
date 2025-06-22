@@ -1514,7 +1514,9 @@ enum e_skill {
 	NPC_GROGGY_ON,
 	NPC_RESET_EFST, //793
 
+	// Custom skills
 	NV_RELOCATION = 800,
+	NV_NULLPHASE,
 
 	KN_CHARGEATK = 1001,
 	CR_SHRINK,

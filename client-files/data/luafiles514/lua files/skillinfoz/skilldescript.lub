@@ -25592,5 +25592,13 @@ SKILL_DESCRIPT = {
 		"Description: ^777777Instantly teleport 4 cells",
 		"if there are no obstacles between the caster",
 		"and destination.^000000"
+	},
+		[SKID.NV_NULLPHASE] = {
+		"Null Phase",
+		"Max Level: 1",
+		"Skill Form: ^3F0099Active^000000",
+		"Type: ^339900Supportive^000000",
+		"Target: ^6666CC1 Character^000000",
+		"Description: ^777777Becoming invulnerable to all damage for 0.5s.^000000"
 	}
 }

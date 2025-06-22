@@ -1416,6 +1416,9 @@ enum sc_type : int16 {
 	SC_SKY_ENCHANT,
 	SC_WILD_WALK,
 
+	// Custom Status Effects
+	SC_NULL_PHASE,
+
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
 
