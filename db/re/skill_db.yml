@@ -49560,3 +49560,14 @@ Body:
     Duration1: 10000
     Cooldown: 60000
     Status: Emergency_Move
+  - Id: 800
+    Name: NV_RELOCATION
+    Description: Relocation
+    MaxLevel: 1
+    TargetType: Ground
+    DamageFlags:
+      NoDamage: true
+    Range: 3
+    Hit: Single
+    HitCount: 1
+    Cooldown: 3000

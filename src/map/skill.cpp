@@ -14229,6 +14229,7 @@ int32 skill_castend_pos2(struct block_list* src, int32 x, int32 y, uint16 skill_
 		case WZ_METEOR:
 		case WZ_ICEWALL:
 		case MO_BODYRELOCATION:
+		case NV_RELOCATION:
 		case CR_CULTIVATION:
 		case HW_GANBANTEIN:
 		case LG_EARTHDRIVE:
@@ -14579,6 +14580,15 @@ int32 skill_castend_pos2(struct block_list* src, int32 x, int32 y, uint16 skill_
 #endif
 			if (sd)
 				skill_blockpc_start (*sd, MO_EXTREMITYFIST, 2000);
+		}
+		break;
+	case NV_RELOCATION:
+		if (unit_movepos(src, x, y, 2, 1)) {
+#if PACKETVER >= 20111005
+			clif_snap(src, src->x, src->y);
+#else
+			clif_skill_poseffect( *src, skill_id, skill_lv, src->x, src->y, tick );
+#endif
 		}
 		break;
 	case NJ_SHADOWJUMP:
