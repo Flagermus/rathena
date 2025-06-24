@@ -2343,9 +2343,6 @@ int64 battle_addmastery(map_session_data *sd,struct block_list *target,int64 dmg
 					damage += (skill * 4);
 				else
 					damage += (skill * 5);
-				// Increase damage by level of KN_SPEARMASTERY * 10
-				if(pc_checkskill(sd,RK_DRAGONTRAINING) > 0)
-					damage += (skill * 10);
 			}
 			break;
 		case W_1HAXE:

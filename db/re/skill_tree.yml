@@ -6724,6 +6724,11 @@ Body:
             Level: 5
           - Name: DK_TWOHANDDEF
             Level: 10
+      - Name: RK_DRAGONTRAINING
+        MaxLevel: 5
+        Requires:
+          - Name: KN_CAVALIERMASTERY
+            Level: 1
   - Job: Meister
     Inherit:
       Novice: true
