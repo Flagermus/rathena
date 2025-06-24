@@ -50,12 +50,10 @@ function	Can_Change_Fourth	{
 	// * Transcendent Third Class
 	if( !.FourthClass )
 		return false; // Fourth job change disabled
-	if( (eaclass()&(EAJL_THIRD|EAJL_UPPER)) != (EAJL_THIRD|EAJL_UPPER) )
-		return false; // Not Transcendent Third Class
+	if( !(eaclass()&EAJL_2) )
+		return false; // Not second Class
 	if( eaclass()&EAJL_FOURTH )
 		return false; // Already Fourth Class
-	if( roclass(eaclass()|EAJL_FOURTH) < 0 )
-		return false; // Job has no Fourth Class
 	return true;
 }
 
@@ -171,7 +169,55 @@ function	Job_Options	{
 	if( .@fourth_possible ) {
 		// Fourth Job change (displayed below rebirth)
 		Require_Level(.Req_Fourth[0], .Req_Fourth[1]);
-		Job_Options(.@job_opt, roclass(.@eac|EAJL_FOURTH));
+
+		switch (.@eac) {
+			case EAJ_LORD_KNIGHT:
+				Job_Options(.@job_opt, JOB_DRAGON_KNIGHT);
+			break;
+			case EAJ_PALADIN:
+				Job_Options(.@job_opt, Job_Imperial_Guard);
+			break;
+
+			case EAJ_HIGH_WIZARD:
+				Job_Options(.@job_opt, Job_Arch_Mage);
+			break;
+			case EAJ_PROFESSOR:
+				Job_Options(.@job_opt, Job_Elemental_Master);
+			break;
+
+			case EAJ_SNIPER:
+				Job_Options(.@job_opt, Job_Windhawk);
+			break;
+			case EAJ_CLOWNGYPSY:
+				Job_Options(.@job_opt, roclass(EAJ_TROUBADOURTROUVERE));
+			break; 
+
+			case EAJ_HIGH_PRIEST:
+				Job_Options(.@job_opt, Job_Cardinal);
+			break;
+			case EAJ_CHAMPION:
+				Job_Options(.@job_opt, Job_Inquisitor);
+			break;
+
+			case EAJ_WHITESMITH:
+				Job_Options(.@job_opt, JOB_MEISTER);
+			break;
+			case EAJ_CREATOR:
+				Job_Options(.@job_opt, JOB_BIOLO);
+			break;
+
+			case EAJ_ASSASSIN_CROSS:
+				Job_Options(.@job_opt, JOB_SHADOW_CROSS);
+			break;
+			case EAJ_STALKER:
+				Job_Options(.@job_opt, JOB_ABYSS_CHASER);
+			break;
+
+			default:
+				mes "Unknown job.";
+			break;
+		}
+
 	}
 	 
 	if (.SecondExpanded && 
@@ -505,7 +551,7 @@ OnInit:
 	// Settings
 	.FourthClass = true;				// Enable fourth classes?
 	.FourthExpanded = true;				// Enable new expanded fourth classes: Ex. Hyper Novice, Rebellion, Shinkiro/Shiranui?
-	.ThirdClass = true;					// Enable third classes?
+	.ThirdClass = false;					// Enable third classes?
 	.RebirthClass = true;				// Enable rebirth classes?
 	.SecondExpanded = true;				// Enable new expanded second classes: Ex. Super Novice, Kagerou/Oboro, Rebellion?
 	.BabyNovice = true;					// Enable Baby novice classes? Disable it if you like player must have parent to get job baby.
@@ -515,7 +561,7 @@ OnInit:
 	.BabySummoner = true;				// Enable Baby Summoner?
 	.LastJob = true;					// Enforce linear class changes?
 	.SkillPointCheck = true;			// Force player to use up all skill points?
-	.Platinum = true;					// Get platinum skills automatically?
+	.Platinum = false;					// Get platinum skills automatically?
 	.GetJobEquip = false;				// Get job equipment (mostly weapons) on job change?
 
 	// Level Requirements
@@ -523,7 +569,7 @@ OnInit:
 	setarray .Req_Second[0],1,40; 		// Minimum base level, job level to turn into 2nd class
 	setarray .Req_Rebirth[0],99,50;		// Minimum base level, job level to rebirth
 	setarray .Req_Third[0],99,50;		// Minimum base level, job level to change to third class
-	setarray .Req_Fourth[0],200,70;		// Minimum base level, job level to change to fourth class
+	setarray .Req_Fourth[0],99,70;		// Minimum base level, job level to change to fourth class
 	setarray .Req_Exp_NJ_GS[0],99,70; 	// Minimum base level, job level to turn into Expanded Ninja and Gunslinger
 	setarray .Req_Exp_SNOVI[0],99,99; 	// Minimum base level, job level to turn into Expanded Super Novice
 	setarray .Req_SHandler[0],200,60;	// Minimum base level, job level to turn into Spirit Handler

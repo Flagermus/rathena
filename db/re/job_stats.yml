@@ -2939,6 +2939,8 @@ Body:
       Rune_Knight_T2: true
       Baby_Rune_Knight: true
       Baby_Rune_Knight2: true
+      Dragon_Knight: true
+      Dragon_Knight2: true
     MaxWeight: 35000
     HpFactor: 150
     SpIncrease: 300
@@ -5029,147 +5031,147 @@ Body:
         Vit: 1
       - Level: 70
         Luk: 1
-  - Jobs:
-      Dragon_Knight: true
-      Dragon_Knight2: true
-    MaxWeight: 45000
-    HpFactor: 150
-    SpIncrease: 300
-    BonusStats:
-      - Level: 1
-        Str: 1
-        Pow: 1
-      - Level: 2
-        Dex: 1
-        Spl: 1
-      - Level: 3
-        Agi: 1
-        Crt: 1
-      - Level: 4
-        Dex: 1
-      - Level: 5
-        Agi: 1
-        Vit: 1
-        Con: 1
-      - Level: 7
-        Luk: 1
-        Spl: 1
-      - Level: 8
-        Int: 1
-        Sta: 1
-      - Level: 9
-        Str: 1
-        Crt: 1
-      - Level: 10
-        Dex: 1
-      - Level: 11
-        Int: 1
-        Con: 1
-      - Level: 12
-        Agi: 1
-      - Level: 14
-        Vit: 1
-        Luk: 1
-      - Level: 16
-        Str: 1
-        Pow: 1
-      - Level: 17
-        Dex: 1
-      - Level: 18
-        Int: 1
-        Con: 1
-      - Level: 19
-        Agi: 1
-        Vit: 1
-      - Level: 20
-        Spl: 1
-      - Level: 21
-        Luk: 1
-      - Level: 22
-        Sta: 1
-      - Level: 23
-        Agi: 1
-        Dex: 1
-      - Level: 24
-        Str: 1
-        Spl: 1
-      - Level: 25
-        Vit: 1
-        Crt: 1
-      - Level: 26
-        Int: 1
-        Pow: 1
-      - Level: 27
-        Dex: 1
-      - Level: 28
-        Luk: 1
-      - Level: 29
-        Pow: 1
-        Con: 1
-      - Level: 30
-        Str: 1
-      - Level: 31
-        Int: 1
-        Luk: 1
-      - Level: 32
-        Vit: 1
-        Wis: 1
-      - Level: 33
-        Agi: 1
-      - Level: 34
-        Crt: 1
-      - Level: 35
-        Dex: 1
-        Con: 1
-      - Level: 36
-        Str: 1
-        Pow: 1
-      - Level: 37
-        Int: 1
-        Sta: 1
-      - Level: 38
-        Agi: 1
-      - Level: 39
-        Spl: 1
-      - Level: 40
-        Luk: 1
-        Sta: 1
-      - Level: 42
-        Vit: 1
-        Crt: 1
-      - Level: 43
-        Int: 1
-        Pow: 1
-      - Level: 44
-        Dex: 1
-        Wis: 1
-      - Level: 45
-        Sta: 1
-      - Level: 46
-        Pow: 1
-        Con: 1
-      - Level: 47
-        Int: 1
-        Wis: 1
-      - Level: 49
-        Agi: 1
-        Crt: 1
-      - Level: 50
-        Vit: 1
-        Pow: 1
-      - Level: 51
-        Crt: 1
-      - Level: 52
-        Pow: 1
-      - Level: 54
-        Pow: 1
-        Crt: 1
-      - Level: 55
-        Sta: 1
-      - Level: 56
-        Sta: 1
-      - Level: 58
-        Con: 1
+  # - Jobs:
+  #     Dragon_Knight: true
+  #     Dragon_Knight2: true
+  #   MaxWeight: 45000
+  #   HpFactor: 150
+  #   SpIncrease: 300
+  #   BonusStats:
+  #     - Level: 1
+  #       Str: 1
+  #       Pow: 1
+  #     - Level: 2
+  #       Dex: 1
+  #       Spl: 1
+  #     - Level: 3
+  #       Agi: 1
+  #       Crt: 1
+  #     - Level: 4
+  #       Dex: 1
+  #     - Level: 5
+  #       Agi: 1
+  #       Vit: 1
+  #       Con: 1
+  #     - Level: 7
+  #       Luk: 1
+  #       Spl: 1
+  #     - Level: 8
+  #       Int: 1
+  #       Sta: 1
+  #     - Level: 9
+  #       Str: 1
+  #       Crt: 1
+  #     - Level: 10
+  #       Dex: 1
+  #     - Level: 11
+  #       Int: 1
+  #       Con: 1
+  #     - Level: 12
+  #       Agi: 1
+  #     - Level: 14
+  #       Vit: 1
+  #       Luk: 1
+  #     - Level: 16
+  #       Str: 1
+  #       Pow: 1
+  #     - Level: 17
+  #       Dex: 1
+  #     - Level: 18
+  #       Int: 1
+  #       Con: 1
+  #     - Level: 19
+  #       Agi: 1
+  #       Vit: 1
+  #     - Level: 20
+  #       Spl: 1
+  #     - Level: 21
+  #       Luk: 1
+  #     - Level: 22
+  #       Sta: 1
+  #     - Level: 23
+  #       Agi: 1
+  #       Dex: 1
+  #     - Level: 24
+  #       Str: 1
+  #       Spl: 1
+  #     - Level: 25
+  #       Vit: 1
+  #       Crt: 1
+  #     - Level: 26
+  #       Int: 1
+  #       Pow: 1
+  #     - Level: 27
+  #       Dex: 1
+  #     - Level: 28
+  #       Luk: 1
+  #     - Level: 29
+  #       Pow: 1
+  #       Con: 1
+  #     - Level: 30
+  #       Str: 1
+  #     - Level: 31
+  #       Int: 1
+  #       Luk: 1
+  #     - Level: 32
+  #       Vit: 1
+  #       Wis: 1
+  #     - Level: 33
+  #       Agi: 1
+  #     - Level: 34
+  #       Crt: 1
+  #     - Level: 35
+  #       Dex: 1
+  #       Con: 1
+  #     - Level: 36
+  #       Str: 1
+  #       Pow: 1
+  #     - Level: 37
+  #       Int: 1
+  #       Sta: 1
+  #     - Level: 38
+  #       Agi: 1
+  #     - Level: 39
+  #       Spl: 1
+  #     - Level: 40
+  #       Luk: 1
+  #       Sta: 1
+  #     - Level: 42
+  #       Vit: 1
+  #       Crt: 1
+  #     - Level: 43
+  #       Int: 1
+  #       Pow: 1
+  #     - Level: 44
+  #       Dex: 1
+  #       Wis: 1
+  #     - Level: 45
+  #       Sta: 1
+  #     - Level: 46
+  #       Pow: 1
+  #       Con: 1
+  #     - Level: 47
+  #       Int: 1
+  #       Wis: 1
+  #     - Level: 49
+  #       Agi: 1
+  #       Crt: 1
+  #     - Level: 50
+  #       Vit: 1
+  #       Pow: 1
+  #     - Level: 51
+  #       Crt: 1
+  #     - Level: 52
+  #       Pow: 1
+  #     - Level: 54
+  #       Pow: 1
+  #       Crt: 1
+  #     - Level: 55
+  #       Sta: 1
+  #     - Level: 56
+  #       Sta: 1
+  #     - Level: 58
+  #       Con: 1
   - Jobs:
       Meister: true
       Meister2: true
