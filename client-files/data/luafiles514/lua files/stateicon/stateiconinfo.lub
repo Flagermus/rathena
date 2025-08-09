@@ -1312,7 +1312,7 @@ StateIconList[EFST_IDs.EFST_REFRESH] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
 	descript = {
-		{ "Refresh", COLOR_TITLE_BUFF },
+		{ "Nosiege", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
 		{ "Recover from all kinds of abnormal states and debuffs" },
 		{ "Immune to abnormal states and debuffs" },
@@ -4073,7 +4073,7 @@ StateIconList[EFST_IDs.EFST_CRUSHSTRIKE] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
 	descript = {
-		{ "Crush Strike", COLOR_TITLE_BUFF },
+		{ "Rhydo", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
 		{ "Increases melee physical attack" }
 	}
@@ -5731,12 +5731,10 @@ StateIconList[EFST_IDs.EFST_GIANTGROWTH] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
 	descript = {
-		{ "Giant Growth", COLOR_TITLE_BUFF },
+		{ "Turisus", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
-		{ "Increases STR" },
-		{ "When attacking with melee attack" },
-		{ "adds chance of inflicting great damage." },
-		{ "Increases melee physical damage." }
+		{ "Increases Critical Damage" },
+		{ "Reduce Critical Rate." }
 	}
 }
 StateIconList[EFST_IDs.EFST_FIGHTINGSPIRIT] = {
@@ -5753,11 +5751,11 @@ StateIconList[EFST_IDs.EFST_VITALITYACTIVATION] = {
 	haveTimeLimit = 1,
 	posTimeLimitStr = 2,
 	descript = {
-		{ "Vitality Activation", COLOR_TITLE_BUFF },
+		{ "Verkana", COLOR_TITLE_BUFF },
 		{ "%s", COLOR_TIME },
-		{ "Increase the effect of" },
-		{ "HP Recovery skill and healing item." },
-		{ "Decreases melee reflected damage." }
+		{ "Reduce Max HP/SP" },
+		{ "Increase HP/SP regenration." }
+
 	}
 }
 StateIconList[EFST_IDs.EFST_LUXANIMA] = {

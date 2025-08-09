@@ -1441,6 +1441,17 @@ enum sc_type : int16 {
 
 	// Custom Status Effects
 	SC_NULL_PHASE,
+	// Dragon Knight rune effects
+	SC_RUNE_TURISUS,
+	SC_RUNE_RHYDO,
+	SC_RUNE_NOSIEGE,
+	SC_RUNE_HAGALAS,
+	SC_RUNE_PERTZ,
+	SC_RUNE_URJ,
+	SC_RUNE_ISIA,
+	SC_RUNE_VERKANA,
+	SC_RUNE_ASIR,
+	SC_RUNE_LUXANIMA,
 
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };

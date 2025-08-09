@@ -3782,8 +3782,6 @@ Body:
     #     Requires:
     #       - Name: RK_DRAGONTRAINING
     #         Level: 2
-    #   - Name: RK_RUNEMASTERY
-    #     MaxLevel: 10
     #   - Name: RK_PHANTOMTHRUST
     #     MaxLevel: 5
     #     Requires:
@@ -6729,6 +6727,8 @@ Body:
         Requires:
           - Name: KN_CAVALIERMASTERY
             Level: 1
+      - Name: RK_RUNEMASTERY
+        MaxLevel: 10
   - Job: Meister
     Inherit:
       Novice: true

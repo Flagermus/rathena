@@ -9785,6 +9785,7 @@ ACMD_FUNC(stats)
 		{ "JobChangeLvl (2nd) - %d", 0 },
 		{ "JobChangeLvl (3rd) - %d", 0 },
 		{ "JobChangeLvl (4th) - %d", 0 },
+		{ "Sleep Resistant - %d", 0 },
 		{ nullptr, 0 }
 	};
 
@@ -9821,7 +9822,111 @@ ACMD_FUNC(stats)
 	output_table[25].value = sd->change_level_3rd;
 	output_table[26].value = sd->change_level_4th;
 
+	// Test check bonus resist
+	auto it = std::find_if(std::begin(sd->reseff), std::end(sd->reseff), [](const s_item_bonus& eff) { return eff.id == SC_SLEEP; });
+	if (it != std::end(sd->reseff)) {
+		output_table[27].value = it->val;
+	} else {
+		output_table[27].value = 0; // or some default value if not found
+	}
+
 	sprintf(job_jobname, "Job - %s %s", job_name(sd->status.class_), "(level %d)");
+	sprintf(output, msg_txt(sd,53), sd->status.name); // '%s' stats:
+
+	clif_displaymessage(fd, output);
+
+	for (i = 0; output_table[i].format != nullptr; i++) {
+		sprintf(output, output_table[i].format, output_table[i].value);
+		clif_displaymessage(fd, output);
+	}
+
+	return 0;
+}
+
+// TODO: Can't get regen values without crash
+ACMD_FUNC(battlestats)
+{
+	nullpo_retr(-1, sd);
+	
+	char job_jobname[100];
+	char output[CHAT_SIZE_MAX];
+	int32 i;
+	struct {
+		const char* format;
+		int32 value;
+	} output_table[] = {
+		{ "% Melee Attack Increase - %d", 0 },
+		{ "% Ranged Attack Increase - %d", 0 },
+		{ "% Hp Regen - %d", 0 },
+		{ "% Sp Regen - %d", 0 },
+		{ "Sp - %d", 0 },
+		{ "MaxSp - %d", 0 },
+		{ "Ap - %d", 0 },
+		{ "MaxAp - %d", 0 },
+		{ "Str - %3d", 0 },
+		{ "Agi - %3d", 0 },
+		{ "Vit - %3d", 0 },
+		{ "Int - %3d", 0 },
+		{ "Dex - %3d", 0 },
+		{ "Luk - %3d", 0 },
+		{ "Pow - %3d", 0 },
+		{ "Sta - %3d", 0 },
+		{ "Wis - %3d", 0 },
+		{ "Spl - %3d", 0 },
+		{ "Con - %3d", 0 },
+		{ "Crt - %3d", 0 },
+		{ "Zeny - %d", 0 },
+		{ "Free Status Points - %d", 0 },
+		{ "Free Trait Points - %d", 0 },
+		{ "Free Skill Points - %d", 0 },
+		{ "JobChangeLvl (2nd) - %d", 0 },
+		{ "JobChangeLvl (3rd) - %d", 0 },
+		{ "JobChangeLvl (4th) - %d", 0 },
+		{ "Sleep Resistant - %d", 0 },
+		{ nullptr, 0 }
+	};
+
+	memset(output, '\0', sizeof(output));
+
+	//direct array initialization with variables is not standard C compliant.
+	output_table[0].value = sd->bonus.short_attack_atk_rate;
+	output_table[1].value = sd->bonus.long_attack_atk_rate;
+	// Safe access to regen values - use status_get_regen_data for proper initialization
+	// struct regen_data *regen = status_get_regen_data(sd);
+	// output_table[2].value = regen ? regen->rate.hp : 100;
+	// output_table[3].value = regen ? regen->rate.sp : 100;
+	output_table[4].value = sd->status.hp;
+	output_table[5].value = sd->status.max_hp;
+	output_table[6].value = sd->status.ap;
+	output_table[7].value = sd->status.max_ap;
+	output_table[8].value = sd->status.str;
+	output_table[9].value = sd->status.agi;
+	output_table[10].value = sd->status.vit;
+	output_table[11].value = sd->status.int_;
+	output_table[12].value = sd->status.dex;
+	output_table[13].value = sd->status.luk;
+	output_table[14].value = sd->status.pow;
+	output_table[15].value = sd->status.sta;
+	output_table[16].value = sd->status.wis;
+	output_table[17].value = sd->status.spl;
+	output_table[18].value = sd->status.con;
+	output_table[19].value = sd->status.crt;
+	output_table[20].value = sd->status.zeny;
+	output_table[21].value = sd->status.status_point;
+	output_table[22].value = sd->status.trait_point;
+	output_table[23].value = sd->status.skill_point;
+	output_table[24].value = sd->change_level_2nd;
+	output_table[25].value = sd->change_level_3rd;
+	output_table[26].value = sd->change_level_4th;
+
+	// Test check bonus resist
+	auto it = std::find_if(std::begin(sd->reseff), std::end(sd->reseff), [](const s_item_bonus& eff) { return eff.id == SC_SLEEP; });
+	if (it != std::end(sd->reseff)) {
+		output_table[27].value = it->val;
+	} else {
+		output_table[27].value = 0; // or some default value if not found
+	}
+
 	sprintf(output, msg_txt(sd,53), sd->status.name); // '%s' stats:
 
 	clif_displaymessage(fd, output);
@@ -11708,6 +11813,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEFR(roulette, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 		ACMD_DEF(setcard),
 		ACMD_DEF(macrochecker),
+		ACMD_DEF(battlestats),
 	};
 	AtCommandInfo* atcommand;
 	int32 i;

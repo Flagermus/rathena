@@ -10,6 +10,8 @@
 #include <cstring>
 #include <ctime>
 
+#include "skills-define/swordman-tree.hpp"
+
 #include <common/cbasetypes.hpp>
 #include <common/ers.hpp>
 #include <common/malloc.hpp>
@@ -8142,7 +8144,51 @@ int32 skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, 
 		sc_start(src,bl,SC_SEVENWIND,100,skill_lv,skill_get_time(skill_id,skill_lv));
 
 		break;
-
+	case RK_RUNEMASTERY:
+		switch(skill_lv) {
+			case RUNE_TURISUS:
+				clif_skill_nodamage(src,*bl,RK_GIANTGROWTH,1,
+					sc_start(src,bl,SC_RUNE_TURISUS,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+				break;
+			case RUNE_RHYDO:
+				clif_skill_nodamage(src,*bl,RK_CRUSHSTRIKE,1,
+					sc_start(src,bl,SC_RUNE_RHYDO,100,skill_lv,skill_get_time(skill_id,skill_lv))); // TODO: Need animation
+				break;
+			case RUNE_NOSIEGE:
+				clif_skill_nodamage(src,*bl,RK_REFRESH,1,
+					sc_start(src,bl,SC_RUNE_NOSIEGE,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+				break;
+			case RUNE_HAGALAS:
+				clif_skill_nodamage(src,*bl,RK_STONEHARDSKIN,1,
+					sc_start(src,bl,SC_RUNE_HAGALAS,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+				break;
+			case RUNE_PERTZ:
+				clif_skill_nodamage(src,*bl,RK_STONEHARDSKIN,1,
+					sc_start(src,bl,SC_RUNE_PERTZ,100,skill_lv,skill_get_time(skill_id,skill_lv))); // TODO: Need animation
+				break;
+			case RUNE_URJ:
+				clif_skill_nodamage(src,*bl,RK_STONEHARDSKIN,1,
+					sc_start(src,bl,SC_RUNE_URJ,100,skill_lv,skill_get_time(skill_id,skill_lv))); // TODO: Need effect
+				break;
+			case RUNE_ISIA:
+				clif_skill_nodamage(src,*bl,RK_MILLENNIUMSHIELD,1,
+					sc_start(src,bl,SC_RUNE_ISIA,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+				break;
+			case RUNE_VERKANA:
+				clif_skill_nodamage(src,*bl,RK_VITALITYACTIVATION,1,
+					sc_start(src,bl,SC_RUNE_VERKANA,100,skill_lv,skill_get_time(skill_id,skill_lv))); // TODO: Need icon		
+				break;
+			case RUNE_ASIR:
+				clif_skill_nodamage(src,*bl,RK_FIGHTINGSPIRIT,1,
+					sc_start(src,bl,SC_RUNE_ASIR,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+			break;
+			case RUNE_LUXANIMA:
+				clif_skill_nodamage(src,*bl,RK_LUXANIMA,1,
+					sc_start(src,bl,SC_RUNE_LUXANIMA,100,skill_lv,skill_get_time(skill_id,skill_lv))); // Doing
+			default:
+				break;
+		}
+		break;
 	case NPC_MOVE_COORDINATE:
 		{
 			int16 px = bl->x, py = bl->y;

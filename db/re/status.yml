@@ -3180,20 +3180,6 @@ Body:
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
-  - Status: Crushstrike
-    Icon: EFST_CRUSHSTRIKE
-    DurationLookup: RK_CRUSHSTRIKE
-    Flags:
-      NoClearbuff: true
-      NoDispell: true
-  - Status: Refresh
-    Icon: EFST_REFRESH
-    DurationLookup: RK_REFRESH
-    Flags:
-      NoClearbuff: true
-      NoDispell: true
-      NoBanishingBuster: true
-      NoSave: true
   - Status: Reuse_Refresh
     Icon: EFST_REUSE_REFRESH
     Flags:
@@ -3205,56 +3191,12 @@ Body:
       NoForcedEnd: true
     Fail:
       Reuse_Refresh: true
-  - Status: Giantgrowth
-    Icon: EFST_GIANTGROWTH
-    DurationLookup: RK_GIANTGROWTH
-    CalcFlags:
-      Str: true
-    Flags:
-      NoClearbuff: true
-      NoDispell: true
-      NoBanishingBuster: true
-  - Status: Stonehardskin
-    Icon: EFST_STONEHARDSKIN
-    DurationLookup: RK_STONEHARDSKIN
-    CalcFlags:
-      Def: true
-      Mdef: true
-    Flags:
-      NoClearbuff: true
-      NoDispell: true
-      NoBanishingBuster: true
-      NoRemoveOnDead: true
-      NoSave: true
-  - Status: Vitalityactivation
-    Icon: EFST_VITALITYACTIVATION
-    DurationLookup: RK_VITALITYACTIVATION
-    CalcFlags:
-      Regen: true
-    Flags:
-      NoClearbuff: true
-      NoDispell: true
-      NoBanishingBuster: true
   - Status: Stormblast
     DurationLookup: RK_VITALITYACTIVATION
     Flags:
       NoDispell: true
       NoBanishingBuster: true
       NoRemoveOnDead: true
-  - Status: Fightingspirit
-    Icon: EFST_FIGHTINGSPIRIT
-    DurationLookup: RK_FIGHTINGSPIRIT
-    CalcFlags:
-      Watk: true
-      Aspd: true
-    Flags:
-      NoClearbuff: true
-      NoDispell: true
-      NoBanishingBuster: true
-      NoClearance: true
-      SendVal2: true
-    EndOnStart:
-      Fightingspirit: true
   - Status: Abundance
     Icon: EFST_ABUNDANCE
     DurationLookup: RK_ABUNDANCE
@@ -7442,16 +7384,6 @@ Body:
   - Status: Soundofdestruction
     Icon: EFST_SOUND_OF_DESTRUCTION
     DurationLookup: WM_SOUND_OF_DESTRUCTION
-  - Status: Luxanima
-    Icon: EFST_LUXANIMA
-    DurationLookup: RK_LUXANIMA
-    CalcFlags:
-      All: true
-    Flags:
-      NoBanishingBuster: true
-      NoDispell: true
-      NoClearance: true
-      NoClearbuff: true
   - Status: Reuse_Limit_Luxanima
     Icon: EFST_REUSE_LIMIT_LUXANIMA
     Flags:
@@ -9920,3 +9852,60 @@ Body:
       NoBanishingBuster: true
       NoDispell: true
       NoClearance: true
+# Dragon Knight Rune Status
+  - Status: Rune_Turisus
+    Icon: EFST_GIANTGROWTH
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      All: true
+  - Status: Rune_Rhydo
+    Icon: EFST_CRUSHSTRIKE
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      Aspd: true
+      Flee: true
+  - Status: Rune_Nosiege
+    Icon: EFST_REFRESH
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      Hit: true
+      Flee2: true
+  - Status: Rune_Hagalas
+    Icon: EFST_STONEHARDSKIN
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      All: true
+  - Status: Rune_Pertz
+    Icon: EFST_REUSE_STORMBLAST
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      All: true
+  - Status: Rune_Urj
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      All: true
+  - Status: Rune_Isia
+    Icon: EFST_VITALITYACTIVATION
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      Def: true
+      Mdef: true
+  - Status: Rune_Verkana
+    Icon: EFST_REUSE_MILLENNIUMSHIELD
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      MaxHp: true
+      MaxSp: true
+      Regen: true
+  - Status: Rune_Asir
+    Icon: EFST_FIGHTINGSPIRIT
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      MaxHp: true
+      Batk: true
+      Watk: true
+  - Status: Rune_Luxanima
+    Icon: EFST_LUXANIMA
+    DurationLookup: RK_RUNEMASTERY
+    CalcFlags:
+      All: true

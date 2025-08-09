@@ -1966,7 +1966,6 @@
 	export_constant(SC_STAR_BURST);
 	export_constant(SC_SKY_ENCHANT);
 	export_constant(SC_WILD_WALK);
-	export_constant(SC_NULL_PHASE);
 	export_constant(SC_SHADOW_CLOCK);
 	export_constant(SC_SHINKIROU_CALL);
 	export_constant(SC_NIGHTMARE);
@@ -1986,6 +1985,19 @@
 	export_constant(SC_CONTENTS_20);
 	export_constant(SC_OVERCOMING_CRISIS);
 
+	// Custom status effects
+	export_constant(SC_NULL_PHASE);
+	export_constant(SC_RUNE_TURISUS);
+	export_constant(SC_RUNE_RHYDO);
+	export_constant(SC_RUNE_NOSIEGE);
+	export_constant(SC_RUNE_HAGALAS);
+	export_constant(SC_RUNE_PERTZ);
+	export_constant(SC_RUNE_URJ);
+	export_constant(SC_RUNE_ISIA);
+	export_constant(SC_RUNE_VERKANA);
+	export_constant(SC_RUNE_ASIR);
+	export_constant(SC_RUNE_LUXANIMA);
+	
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
 	export_constant(EFST_BLANK);

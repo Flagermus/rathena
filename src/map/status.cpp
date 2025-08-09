@@ -8,6 +8,8 @@
 #include <functional>
 #include <string>
 
+#include "skills-define/swordman-tree.hpp"
+
 #include <common/cbasetypes.hpp>
 #include <common/ers.hpp>
 #include <common/malloc.hpp>
@@ -125,6 +127,9 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 
 static bool status_change_isDisabledOnMap_(sc_type type, bool mapIsVS, bool mapIsPVP, bool mapIsGVG, bool mapIsBG, uint32 mapZone, bool mapIsTE);
 #define status_change_isDisabledOnMap(type, m) ( status_change_isDisabledOnMap_((type), mapdata_flag_vs2((m)), m->getMapFlag(MF_PVP) != 0, mapdata_flag_gvg2_no_te((m)), m->getMapFlag(MF_BATTLEGROUND) != 0, (m->zone << 3) != 0, mapdata_flag_gvg2_te((m))) )
+
+void status_calc_bl_main(struct block_list& bl, std::bitset<SCB_MAX> flag);
+void status_calc_in_combat(struct block_list* bl, status_change *sc, status_data* status);
 
 const std::string RefineDatabase::getDefaultLocation(){
 	return std::string( db_path ) + "/refine.yml";
@@ -1614,6 +1619,8 @@ int32 status_damage(struct block_list *src,struct block_list *target,int64 dhp, 
 	status->sp-= sp;
 	status->ap-= ap;
 
+	status_calc_in_combat(target, sc, status);
+
 	// Coma
 	if (flag&16) {
 		status->hp = 1;
@@ -1853,6 +1860,8 @@ int32 status_heal(struct block_list *bl,int64 hhp,int64 hsp, int64 hap, int32 fl
 	status->hp += hp;
 	status->sp += sp;
 	status->ap += ap;
+
+	status_calc_in_combat(bl, sc, status);
 
 	if(hp && sc &&
 		sc->getSCE(SC_AUTOBERSERK) &&
@@ -3226,6 +3235,8 @@ static int32 status_get_hpbonus(struct block_list *bl, enum e_status_bonus type)
 				bonus += sc->getSCE(SC_UPHEAVAL_OPTION)->val2;
 			if(sc->getSCE(SC_LAUDAAGNUS))
 				bonus += 2 + (sc->getSCE(SC_LAUDAAGNUS)->val1 * 2);
+			if (sc->getSCE(SC_RUNE_ASIR))
+				bonus += sc->getSCE(SC_RUNE_ASIR)->val2;
 #ifdef RENEWAL
 			if (sc->getSCE(SC_NIBELUNGEN) && sc->getSCE(SC_NIBELUNGEN)->val2 == RINGNBL_HPRATE)
 				bonus += 30;
@@ -3246,6 +3257,11 @@ static int32 status_get_hpbonus(struct block_list *bl, enum e_status_bonus type)
 				bonus -= sc->getSCE(SC__WEAKNESS)->val2;
 			if(sc->getSCE(SC_EQC))
 				bonus -= sc->getSCE(SC_EQC)->val3;
+
+			const auto* verkana = sc->getSCE(SC_RUNE_VERKANA);
+				if (verkana)
+					bonus -= verkana->val3;
+
 		}
 		// Max rate reduce is -100%
 		bonus = cap_value(bonus,-100,INT_MAX);
@@ -3373,6 +3389,11 @@ static int32 status_get_spbonus(struct block_list *bl, enum e_status_bonus type)
 			//Decreasing
 			if (sc->getSCE(SC_MELODYOFSINK))
 				bonus -= sc->getSCE(SC_MELODYOFSINK)->val3;
+
+			const auto* verkana = sc->getSCE(SC_RUNE_VERKANA);
+			if (verkana)
+				bonus -= verkana->val3;
+			
 		}
 		// Max rate reduce is -100%
 		bonus = cap_value(bonus,-100,INT_MAX);
@@ -4868,6 +4889,26 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			sd->bonus.short_attack_atk_rate += sc->getSCE(SC_LUXANIMA)->val3;
 			sd->bonus.long_attack_atk_rate += sc->getSCE(SC_LUXANIMA)->val3;
 		}
+		if (sc->getSCE(SC_RUNE_TURISUS)) {
+			sd->bonus.crit_atk_rate += sc->getSCE(SC_RUNE_TURISUS)->val2;
+		}
+		if (sc->getSCE(SC_RUNE_HAGALAS)) {
+			pc_bonus2(sd, SP_RESEFF, SC_STONE, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_FREEZE, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_SLEEP, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_POISON, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_CURSE, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_SILENCE, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_CONFUSION, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_BLIND, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+			pc_bonus2(sd, SP_RESEFF, SC_BLEEDING, sc->getSCE(SC_RUNE_HAGALAS)->val2);
+		}
+		if (sc->getSCE(SC_RUNE_PERTZ)) {
+			sd->bonus.long_attack_atk_rate += sc->getSCE(SC_RUNE_PERTZ)->val2;
+		}
+		if (sc->getSCE(SC_RUNE_LUXANIMA)) {
+			pc_bonus2(sd, SP_ADDSIZE, SZ_ALL, sc->getSCE(SC_RUNE_LUXANIMA)->val2);
+		}
 		if (sc->getSCE(SC_STRIKING))
 			sd->bonus.perfect_hit += 20 + 10 * pc_checkskill(sd, SO_STRIKING);
 
@@ -5432,6 +5473,12 @@ void status_calc_regen_rate(struct block_list *bl, struct regen_data *regen, sta
 
 	if (sc->getSCE(SC_MAGNIFICAT))
 		regen->rate.sp += 100;
+
+	const auto* verkana = sc->getSCE(SC_RUNE_VERKANA);
+	if (verkana) {
+		regen->rate.hp += verkana->val2;
+		regen->rate.sp += verkana->val2;
+	}
 
 	if (sc->getSCE(SC_REGENERATION)) {
 		const struct status_change_entry *sce = sc->getSCE(SC_REGENERATION);
@@ -7417,6 +7464,8 @@ static uint16 status_calc_watk(struct block_list *bl, status_change *sc, int32 w
 		watk += sc->getSCE(SC_POWERFUL_FAITH)->val2;
 	if (sc->getSCE(SC_GUARD_STANCE))
 		watk -= sc->getSCE(SC_GUARD_STANCE)->val3;
+	if (sc->getSCE(SC_RUNE_ASIR))
+		watk -= watk * sc->getSCE(SC_RUNE_ASIR)->val3 / 100;
 
 	return (uint16)cap_value(watk,0,USHRT_MAX);
 }
@@ -7519,6 +7568,8 @@ static int16 status_calc_critical(struct block_list *bl, status_change *sc, int3
 		critical += 3*sc->getSCE(SC_SPEARQUICKEN)->val1*10;
 	if (sc->getSCE(SC_TWOHANDQUICKEN))
 		critical += (2 + sc->getSCE(SC_TWOHANDQUICKEN)->val1) * 10;
+	if (sc->getSCE(SC_RUNE_TURISUS))
+		critical -= sc->getSCE(SC_RUNE_TURISUS)->val3;	
 #endif
 	if (sc->getSCE(SC__INVISIBILITY))
 		critical += sc->getSCE(SC__INVISIBILITY)->val3 * 10;
@@ -7598,6 +7649,8 @@ static int16 status_calc_hit(struct block_list *bl, status_change *sc, int32 hit
 		hit += sc->getSCE(SC_ABYSS_SLAYER)->val3;
 	if (sc->getSCE(SC_INTENSIVE_AIM))
 		hit += 250;
+	if (sc->getSCE(SC_RUNE_NOSIEGE))
+		hit += hit * sc->getSCE(SC_RUNE_NOSIEGE)->val2 / 100;
 
 	return (int16)cap_value(hit,1,SHRT_MAX);
 }
@@ -7662,6 +7715,8 @@ static int16 status_calc_flee(struct block_list *bl, status_change *sc, int32 fl
 		flee -= sc->getSCE(SC_C_MARKER)->val3;
 	if( sc->getSCE(SC_WILD_WALK) != nullptr )
 		flee += sc->getSCE(SC_WILD_WALK)->val3;
+	if (sc->getSCE(SC_GROOMING))
+		flee += sc->getSCE(SC_GROOMING)->val2;
 #ifdef RENEWAL
 	if( sc->getSCE(SC_SPEARQUICKEN) )
 		flee += 2 * sc->getSCE(SC_SPEARQUICKEN)->val1;
@@ -7708,8 +7763,8 @@ static int16 status_calc_flee(struct block_list *bl, status_change *sc, int32 fl
 		flee -= flee * 50 / 100;
 	//if( sc->getSCE(SC_C_MARKER) )
 	//	flee -= (flee * sc->getSCE(SC_C_MARKER)->val3) / 100;
-	if (sc->getSCE(SC_GROOMING))
-		flee += sc->getSCE(SC_GROOMING)->val2;
+	if (sc->getSCE(SC_RUNE_RHYDO))
+		flee += flee * sc->getSCE(SC_RUNE_RHYDO)->val2 / 100;
 
 	return (int16)cap_value(flee,1,SHRT_MAX);
 }
@@ -7734,6 +7789,8 @@ static int16 status_calc_flee2(struct block_list *bl, status_change *sc, int32 f
 		flee2 += sc->getSCE(SC_HISS)->val2*10;
 	if (sc->getSCE(SC_DORAM_FLEE2))
 		flee2 += sc->getSCE(SC_DORAM_FLEE2)->val1;
+	if (sc->getSCE(SC_RUNE_NOSIEGE))
+		flee2 += flee2 * sc->getSCE(SC_RUNE_NOSIEGE)->val2 / 100;
 
 	return (int16)cap_value(flee2,10,SHRT_MAX);
 }
@@ -7747,6 +7804,8 @@ static int16 status_calc_flee2(struct block_list *bl, status_change *sc, int32 f
  */
 static defType status_calc_def(struct block_list *bl, status_change *sc, int32 def)
 {
+	status_data* status = status_get_status_data(*bl); // Battle Status
+
 	if(sc == nullptr || sc->empty())
 		return (defType)cap_value(def,DEFTYPE_MIN,DEFTYPE_MAX);
 
@@ -7844,6 +7903,11 @@ static defType status_calc_def(struct block_list *bl, status_change *sc, int32 d
 	if (sc->getSCE(SC_ATTACK_STANCE))
 		def -= sc->getSCE(SC_ATTACK_STANCE)->val2;
 
+	const auto* isia = sc->getSCE(SC_RUNE_ISIA);
+	if (isia && status->hp > (RUNE_ISIA_HP_THRESHOLD * status->max_hp / 100)) {
+		def += def * isia->val2 / 100;
+	}
+
 	return (defType)cap_value(def,DEFTYPE_MIN,DEFTYPE_MAX);
 }
 
@@ -7922,6 +7986,8 @@ static int16 status_calc_def2(struct block_list *bl, status_change *sc, int32 de
  */
 static defType status_calc_mdef(struct block_list *bl, status_change *sc, int32 mdef)
 {
+	status_data* status = status_get_status_data(*bl); // Battle Status
+
 	if(sc == nullptr || sc->empty())
 		return (defType)cap_value(mdef,DEFTYPE_MIN,DEFTYPE_MAX);
 
@@ -7967,6 +8033,11 @@ static defType status_calc_mdef(struct block_list *bl, status_change *sc, int32 
 		mdef += sc->getSCE(SC_STONE_WALL)->val3;
 	if (sc->getSCE(SC_CLIMAX_CRYIMP))
 		mdef += 100;
+
+	const auto* isia = sc->getSCE(SC_RUNE_ISIA);
+	if (isia && status->hp > (RUNE_ISIA_HP_THRESHOLD * status->max_hp / 100)) {
+		mdef += mdef * isia->val2 / 100;
+	}
 
 	return (defType)cap_value(mdef,DEFTYPE_MIN,DEFTYPE_MAX);
 }
@@ -8348,6 +8419,8 @@ static int16 status_calc_aspd(struct block_list *bl, status_change *sc, bool fix
 			bonus += 20;
 		if (sc->getSCE(SC_STARSTANCE))
 			bonus += sc->getSCE(SC_STARSTANCE)->val2;
+		if (sc->getSCE(SC_RUNE_RHYDO))
+			bonus += sc->getSCE(SC_RUNE_RHYDO)->val2;
 
 		map_session_data* sd = BL_CAST(BL_PC, bl);
 		uint8 skill_lv;
@@ -11842,6 +11915,41 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_LUXANIMA:
 			val2 = 15; // Storm Blast success %
 			val3 = 30; // Damage/HP/SP % increase
+			break;
+		
+		/* Custom Dragon Knight*/
+		case SC_RUNE_TURISUS:
+			val2 = 15; // Critical Damage increase
+			val3 = 50; // 5% Critical Chance penalty
+			break;
+		case SC_RUNE_RHYDO:
+			val2 = 5; // 5% Attack Speed and Flee increase
+			break;
+		case SC_RUNE_NOSIEGE:
+			val2 = 10; // 10% HIT and Prefect Dodge increase
+			break;
+		case SC_RUNE_HAGALAS:
+			val2 = 15; // 15% Status Resistance increase
+			break;
+		case SC_RUNE_PERTZ:
+			val2 = 15; // 15% Ranged Damage increase
+			break;
+		case SC_RUNE_URJ:
+			// TODO
+			break;
+		case SC_RUNE_ISIA:
+			val2 = 10; // 10% Hard DEF and MDEF increase
+			break;
+		case SC_RUNE_VERKANA:
+			val2 = 50; // 50% HP/SP Regen increase
+			val3 = 5; // 5% Max HP/SP decrease
+			break;
+		case SC_RUNE_ASIR:
+			val2 = 10; // 10% Max HP/SP increase
+			val3 = 5; // 5% ATK decrease
+			break;
+		case SC_RUNE_LUXANIMA:
+			val2 = 10; // 10% Damage increase to all size
 			break;
 
 		/* Arch Bishop */
@@ -16502,4 +16610,14 @@ void do_final_status(void) {
 	status_db.clear();
 	elemental_attribute_db.clear();
 	delay_status.clear();
+}
+
+// Calculate stats in combat
+void status_calc_in_combat(struct block_list* bl, status_change* sc, status_data* status) {
+	if (!sc || bl->type != BL_PC)
+		return;
+
+	if (sc->getSCE(SC_RUNE_ISIA)) {
+		status_calc_pc((TBL_PC*)bl, SCO_NONE);
+	}
 }

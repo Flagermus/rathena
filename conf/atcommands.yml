@@ -33,6 +33,9 @@ Header:
   Version: 1
 
 Body:
+  - Command: battlestats
+    Help: |
+      Shows the battle stats.
   - Command: accept
     Help: |
       Accepts an invitation to a duel.

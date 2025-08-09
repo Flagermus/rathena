@@ -1,0 +1,21 @@
+#ifndef SWORDMAN_TREE_HPP
+#define SWORDMAN_TREE_HPP
+
+#include <common/cbasetypes.hpp>
+
+#define RUNE_ISIA_HP_THRESHOLD 40
+
+enum e_rune_skill : uint8 {
+	RUNE_TURISUS = 1,
+	RUNE_RHYDO,
+	RUNE_NOSIEGE,
+	RUNE_HAGALAS,
+	RUNE_PERTZ,
+	RUNE_URJ,
+	RUNE_ISIA,
+	RUNE_VERKANA,
+	RUNE_ASIR,
+	RUNE_LUXANIMA,
+};
+
+#endif /* SWORDMAN_TREE_HPP */

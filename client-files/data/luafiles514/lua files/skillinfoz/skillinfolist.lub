@@ -2165,7 +2165,7 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.RK_REFRESH] = {
 		"RK_REFRESH",
-		SkillName = "Refresh",
+		SkillName = "Nosiege",
 		MaxLv = 1,
 		SpAmount = { 0 },
 		bSeperateLv = false,
@@ -5770,13 +5770,13 @@ SKILL_INFO_LIST = {
 		"RK_RUNEMASTERY",
 		SkillName = "Rune Mastery",
 		MaxLv = 10,
-		SpAmount = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-		bSeperateLv = false,
+		SpAmount = { 20, 20, 20, 40, 40, 40, 60, 60, 60, 60 },
+		bSeperateLv = true,
 		AttackRange = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 	},
 	[SKID.RK_CRUSHSTRIKE] = {
 		"RK_CRUSHSTRIKE",
-		SkillName = "Crush Strike",
+		SkillName = "Rhydo",
 		MaxLv = 1,
 		SpAmount = { 0 },
 		bSeperateLv = false,
@@ -5792,7 +5792,7 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.RK_VITALITYACTIVATION] = {
 		"RK_VITALITYACTIVATION",
-		SkillName = "Vitality Activation",
+		SkillName = "Verkana",
 		MaxLv = 1,
 		SpAmount = { 0 },
 		bSeperateLv = false,
@@ -10550,7 +10550,7 @@ SKILL_INFO_LIST = {
 	},
 	[SKID.RK_GIANTGROWTH] = {
 		"RK_GIANTGROWTH",
-		SkillName = "Giant Growth",
+		SkillName = "Turisus",
 		MaxLv = 1,
 		SpAmount = { 0 },
 		bSeperateLv = false,
